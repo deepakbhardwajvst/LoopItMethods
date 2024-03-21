@@ -3,7 +3,7 @@ const InputText = ({ typetext, placeholdertext }) => {
   return (
     <>
       <input
-        className="w-[402px] my-3 py-4 px-4 block  rounded-[10px] shadow text-lg font-semibold placeholder:text-[14px] placeholder:text-[#5A5A5A] placeholder:font-normal outline-none"
+        className="w-[402px] my-2 py-4 px-4 block  rounded-[10px] shadow text-lg font-semibold placeholder:text-[14px] placeholder:text-[#5A5A5A] placeholder:font-normal outline-none"
         type={typetext}
         name=""
         id=""
