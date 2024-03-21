@@ -7,12 +7,12 @@ export default function Component() {
   if(session) {
     return <>
       Signed in as {session.user.email} <br/>
-      <button onClick={() => signOut()}>Sign out</button>
+      <button onClick={() => signOut()}>Logout</button>
     </>
   }
   return <>
     Not signed in <br/>
-    <button onClick={() => signIn("github")}>Sign in using Github</button>
-    <button onClick={() => signIn("google")}>Sign in using Google</button> 
+    <button onClick={() => signIn("github")}>Github</button>
+    <button onClick={() => signIn("google")}>Google</button> 
   </>
 }
