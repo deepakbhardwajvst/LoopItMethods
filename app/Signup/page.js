@@ -1,14 +1,30 @@
 "use client";
 import Switch from "@mui/material/Switch";
 import InputText from "../component/input/InputText";
-
-
+import BoxOne from './../component/BoxOne/BoxOne';
+import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
+import Category from "../component/category/Category";
+import Navbar from "../component/Navbar/Navbar";
+import GitHubIcon from '@mui/icons-material/GitHub';
+ 
 const Signup = () => {
+  const { data: session } = useSession();
+  
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user.name} <br />
+        <Navbar signOut={signOut} />
+        <Category />
+      </>
+    );
+  }
   const label = { inputProps: { "aria-label": "Switch demo" } };
   return (
     <div className="">
       <div className="flex">
-        <div className="relative">
+        <div className="relative border border-black">
           <img
             src="https://s3-alpha-sig.figma.com/img/56b9/656e/4643172f5a7c37a594841c4236f29668?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Ucx00rwtuqSnKBR4sj1kQyNnXkHYXX9QB8BmT10SoX8iryFX07e7Yk-5hqvgXQQYdzk1tUQxhKv8oA8QCvJ94-W9ly0N525WxRlptir4q7Zm~Q-bvbjSxDPOuUOiEysfJShLPmQt-MB7wkmIdKxbzoyyEMhbi8Qas-tKzkl1Fb7MWSA-hqlD8bFyj8z-llcrXsM~Gtvc5~Zt5t7C8IaBQ90FzMqHhsO5wl~UwFUvpGH~Zw5Nlch9qczGRp~vAkA6vtbrwCZ9TMDUKC1NQB1XDnAcKmvCXcrsw2gKof77JVpd8u1sO~cmbHCHRJHUVJTU27gPkoYJsyk2gGw-HkLBLw__"
             alt=""
@@ -30,13 +46,66 @@ const Signup = () => {
             </svg>
             <p className="ml-2 font-[500] text-[16.93px]">Logo Here</p>
           </div>
+          <div className=" absolute top-80 left-[72px]">
+            <BoxOne
+              Btext="Royal Stock Images"
+              bbgOne="bg-[#4CAF50]"
+              bbgTwo="bg-[#2e6930]"
+            />
+            <div className="bg-[#0900003e]  my-4 p-8 w-[346px] h-[158.04px]  rounded-[10px]">
+              <div className="bg-[#000000]  mb-5 flex items-center gap-2 rounded-[10px] px-3 py-2 w-max">
+                <div className="w-[25px] h-[27px] ">
+                  <svg
+                    width="26"
+                    height="27"
+                    viewBox="0 0 26 27"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.5642 12.8957C16.2648 12.8957 15.9653 12.7458 15.7906 12.4835L11.7978 6.51177C11.6605 6.29939 11.6106 6.04953 11.6605 5.81216C11.7104 5.57479 11.8477 5.3499 12.0598 5.21248L19.1222 0.477597C19.6712 0.102805 20.3325 -0.02211 20.9813 0.102821C21.6302 0.227751 22.1917 0.602539 22.566 1.15223L24.837 4.53784C25.5981 5.67471 25.2986 7.22386 24.1507 7.98594L17.1008 12.7208C16.9261 12.8458 16.7514 12.8957 16.5642 12.8957ZM13.8815 6.24942L16.8263 10.6595L23.1026 6.44928C23.3895 6.26188 23.4644 5.87461 23.2648 5.59976L20.9938 2.21415C20.9065 2.07673 20.7692 1.98929 20.607 1.95181C20.4448 1.91433 20.2826 1.95178 20.1453 2.03923L13.8815 6.24942Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M10.2132 16.2939C9.91375 16.2939 9.61428 16.144 9.43959 15.8817L6.24528 11.1092C5.95829 10.6845 6.07059 10.0973 6.50731 9.80994L12.4717 5.81214C12.6838 5.67472 12.9334 5.62473 13.1704 5.6747C13.42 5.72467 13.6321 5.86211 13.7694 6.07449L16.9637 10.8469C17.2507 11.2717 17.1384 11.8589 16.7016 12.1462L10.7373 16.144C10.5751 16.2439 10.3879 16.2939 10.2132 16.2939ZM8.31659 10.8469L10.4628 14.0577L14.8674 11.1092L12.7212 7.88602L8.31659 10.8469Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M4.39825 19.5172C3.6995 19.5172 3.00075 19.1799 2.57651 18.5428L1.16654 16.4439C0.842116 15.9567 0.729814 15.382 0.842113 14.8073C0.954413 14.2326 1.27883 13.7454 1.76546 13.4206L6.69415 10.1224C7.11839 9.83508 7.70485 9.94755 7.99183 10.3848L10.7868 14.5575C11.0738 14.9823 10.9615 15.5694 10.5248 15.8568L5.59611 19.1549C5.23426 19.3923 4.81002 19.5172 4.39825 19.5172ZM6.95618 12.1838L2.81359 14.9573C2.67634 15.0572 2.62643 15.2446 2.72625 15.3945L4.13622 17.4934C4.23604 17.6308 4.42321 17.6807 4.57294 17.5808L8.71553 14.8073L6.95618 12.1838Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M7.2435 26.9256C7.11872 26.9256 6.98147 26.9006 6.85669 26.8381C6.38254 26.6257 6.18289 26.0635 6.39501 25.6013L11.9975 13.358C12.2096 12.8833 12.7711 12.6833 13.2328 12.8957C13.707 13.1081 13.9066 13.6703 13.6945 14.1326L8.09198 26.3759C7.92977 26.7257 7.59287 26.9256 7.2435 26.9256Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M18.3239 26.9255C17.962 26.9255 17.6251 26.7256 17.4754 26.3758L11.9353 14.1325C11.7232 13.6578 11.9353 13.1081 12.397 12.8957C12.8586 12.6833 13.4201 12.8957 13.6323 13.358L19.1724 25.6012C19.3845 26.076 19.1724 26.6257 18.7107 26.8381C18.5859 26.9005 18.4611 26.9255 18.3239 26.9255Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <p className="text-white">
+                Best Stock Photos and Videos from across the internet.
+              </p>
+            </div>
+          </div>
+          <div className=" absolute bottom-40 right-[-3.7rem]">
+            <BoxOne
+              Btext="Image Editor"
+              bbgOne="bg-[#5a5a5a]"
+              bbgTwo="bg-[#9c9c9c]"
+            />
+          </div>
         </div>
         <div className="w-[50vw] h-screen bg-[#e6e6e6]">
           <div className="flex justify-between m-8">
             <div className=""></div>
             <div className="flex">
               <p className="font-[300] text-sm">have an account?</p>
-              <p className="text-[#20DC49] ml-2 mr-8 font-[500] text-sm">Sign in!</p>
+              <p className="text-[#20DC49] ml-2 mr-8 font-[500] text-sm cursor-pointer">
+                <Link href="/">Sign in!</Link>
+              </p>
             </div>
           </div>
           <div className="flex flex-col justify-center items-center h-[90%]">
@@ -46,7 +115,8 @@ const Signup = () => {
             <h4 className=" text-[15.04px] mb-6">Getting started is easy</h4>
             <button
               type="button"
-              className="flex justify-center items-center gap-2 w-[402px] text-[16px] font-medium py-2 px-4 bg-white text-black rounded-[10px] shadow"
+              onClick={() => signIn("google")}
+              className="flex justify-center items-center gap-2 w-[402px] text-[16px] font-medium py-2 px-4 bg-white text-black rounded-[10px] mb-4 shadow"
             >
               <svg
                 width="28"
@@ -89,6 +159,14 @@ const Signup = () => {
               </svg>
               <p className="">Google</p>
             </button>
+            <button
+              type="button"
+              onClick={() => signIn("github")}
+              className="flex justify-center items-center gap-2 w-[402px] text-[16px] font-medium py-2 px-4 bg-white text-black rounded-[10px] shadow "
+            >
+              <GitHubIcon />
+              <p className="">Github</p>
+            </button>
             <div className="my-4">
               <p className=" text-[13px]  font-normal text-black">
                 Or continue with
@@ -107,7 +185,7 @@ const Signup = () => {
               />
             </div>
             <div className="mt-2 flex justify-start w-[402px]">
-              <label className="inline-flex items-center">
+              <label className="inline-flex items-center cursor-pointer">
                 <Switch {...label} />
 
                 <span className="ml-2 text-lg font-semibold">Remember me</span>

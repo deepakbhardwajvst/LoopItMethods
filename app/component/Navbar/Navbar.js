@@ -1,7 +1,7 @@
 import React from 'react'
 import InputText from './../input/InputText';
 
-const Navbar = () => {
+const Navbar = ({ signOut }) => {
   return (
     <nav className="flex justify-between bg-[#181818] max-h-20">
       <div className="text-white flex items-center gap-4">
@@ -11,7 +11,11 @@ const Navbar = () => {
         <h2 className="">Home</h2>
       </div>
       <div className="text-white flex items-center gap-4">
-        <button type="button" className="bg-[#4CAF50] rounded-md px-2 py-1">
+        <button
+          type="button"
+          className="bg-[#4CAF50] rounded-md px-2 py-1"
+          onClick={() => signOut()}
+        >
           Logout
         </button>
         <input
@@ -22,6 +26,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar

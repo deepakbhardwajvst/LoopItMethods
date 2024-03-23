@@ -27,7 +27,7 @@ const Login = () => {
             </div>
             <div className="flex">
               <p className="font-[300] text-sm">Don’t have an account?</p>
-              <p className="text-[#20DC49] ml-4 font-[500] text-sm">Sign up!</p>
+              <p className="text-[#20DC49] ml-4 font-[500] text-sm cursor-pointer">Sign up!</p>
             </div>
           </div>
           <div className="flex flex-col justify-center items-center h-[90%]">
@@ -85,9 +85,7 @@ const Login = () => {
             </div>
             <InputText typetext={"email"} placeholdertext={"email"} />
             <div className="relative">
-            <InputText typetext={"password"} placeholdertext={"password"} />
-              
-              
+              <InputText typetext={"password"} placeholdertext={"password"} />
             </div>
             <div className="mt-2 flex justify-start w-[402px]">
               <label className="inline-flex items-center">
@@ -104,12 +102,26 @@ const Login = () => {
             </button>
           </div>
         </div>
-        <div className="a">
+        <div className="border border-black relative">
           <img
             src="https://s3-alpha-sig.figma.com/img/f4ef/0c0d/b4a8a04df58935372c2e205396f0a75f?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EeNlUceAERXK87GOxfF-OC3LU7FxFoeW5qeeTE3QSVUPfsj3ChS7nMtYiTUQduNjq2zdFIBknjU1mQvuCV8y88FZXj82qw6L4Mt4rGStkRrwBbF1nY6AU7jw8f8v25vBfp7IuPjUVluUHBwd6Bq0lEULdi1auyluCcCiIsgpTFfotNg0pQxy6ljfvU7K58YT3IpakzhGwh0Qro7yXvK9CKaq-vgbJXJ11FTOHMhBV05-GhhreDdWZlkcjHGuLen8FMZmbgkAz88X7Dh5OR30kgci8xB7UbUdKF1Bt1iYc4KCXSDd7z9UBI6yQnjT20aj7t4CddlqArgpyB6-ISxDeA__"
             alt=""
             className="w-[50vw] h-screen object-cover"
           />
+          <div className="bg-[#FFF2F221] mx-24 my-8 p-8 absolute bottom-0 rounded-[10px]">
+            <div className="bg-[#4CAF50]  mb-5 flex items-center gap-2 rounded-[10px] px-4 py-2 w-max">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/27a7/295f/f9e9fd2354e36afd9e5117fb9d6d87ba?Expires=1711929600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Y~LY3gEU8GwzeEzchVKUzCPBytem9D-ydV5p-93xiNO204MrIqcPP8exACyWUbNISSVnypOA6HIwMfmojePv4-j9TdWvFr1ormZpGE9rTfcUzRBtmjjdTR9UBCk2-fs0BzSnJAzyqNJl2OyLofn~4v9oakiHTXj~2zc-G9LGNr8kXM3mcxU6Kl16nMirHzpcZsx~pNa9kGXMzBB4~0sFJhWnlrX8-xuBqOAhYVnScHFmBzMxXDYZU14W5RXK76cdD943SYBUqHcJugDY7tvqDbHdeJb6V~ZWVj7njNLd28IhjVBG2jMfsHXi7OcSqu8vGbxqpEVlQb2Gwf2MhQQNJg__"
+                alt=""
+                className="w-[22.05px] h-[22.05px] "
+              />
+              <p className="text-sm text-white">Top Notch Stock Resources</p>
+            </div>
+            <p className="text-white">
+              Today, we create innovative solutions to the challenges that
+              consumers face in both their everyday lives and events.
+            </p>
+          </div>
         </div>
       </div>
     </div>
