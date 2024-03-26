@@ -1,5 +1,7 @@
 "use client";
 import Switch from "@mui/material/Switch";
+import { useState } from "react";
+
 import InputText from "../component/input/InputText";
 import BoxOne from './../component/BoxOne/BoxOne';
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -7,20 +9,131 @@ import Link from "next/link";
 import Category from "../component/category/Category";
 import Navbar from "../component/Navbar/Navbar";
 import GitHubIcon from '@mui/icons-material/GitHub';
- 
+const initialNotes = [
+  {
+    id: 1,
+    content: "Category",
+    children: [
+      {
+        id: 2,
+        content: "Sub Category",
+        children: [
+          {
+            id: 3,
+            content: "main sub category",
+            children: [
+              {
+                id: 4,
+                content: "main sub sub categiry",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 5,
+        content: "nasted lavel",
+      },
+    ],
+  },
+];
 const Signup = () => {
+
+  const [notes, setNotes] = useState(initialNotes);
+  const deleteNote = (notes, noteId) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === noteId) {
+        // If the current note matches the provided noteId, returning null to delete it
+        return null;
+      } else if (note.children) {
+        // If the current note has children, recursively calling deleteNote on its children
+        note.children = deleteNote(note.children, noteId);
+      }
+      return note;
+    });
+
+    // Filtering out the deleted note and updating the notes array
+    return updatedNotes.filter((note) => note !== null);
+  };
+  const editNote = (notes, noteId, newContent) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === noteId) {
+        note.content = newContent;
+      } else if (note.children) {
+        note.children = editNote(note.children, noteId, newContent);
+      }
+      return note;
+    });
+    return updatedNotes;
+  };
+
+  const createChildNote = (notes, parentId) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === parentId) {
+        const newChild = {
+          id: Date.now(),
+          content: "New Note",
+          children: [],
+        };
+        note.children = [...(note.children || []), newChild];
+      } else if (note.children) {
+        note.children = createChildNote(note.children, parentId);
+      }
+      return note;
+    });
+    return updatedNotes;
+  };
+  const handleDelete = (noteId) => {
+    const updatedNotes = deleteNote(notes, noteId);
+    setNotes(updatedNotes);
+  };
+
+  const handleEdit = (noteId, newContent) => {
+    const updatedNotes = editNote(notes, noteId, newContent);
+    setNotes(updatedNotes);
+  };
+
+  const handleCreateChild = (parentId) => {
+    const updatedNotes = createChildNote(notes, parentId);
+    setNotes(updatedNotes);
+  };
   const { data: session } = useSession();
-  
+  const label = { inputProps: { "aria-label": "Switch demo" } };
   if (session) {
     return (
       <>
         Signed in as {session.user.name} <br />
         <Navbar signOut={signOut} />
-        <Category />
+        <div className="w-full flex justify-center items-center mt-20">
+          <input
+            type="search"
+            name=""
+            id="search"
+            placeholder="Enter text..."
+            className="w-[35%] border border-[#5A5A5A] p-4 outline-none"
+          />
+          <button className=" bg-[#4CAF50] p-[1.1rem] border-none ml-1 text-white">
+            Create Note
+          </button>
+        </div>
+        <div className="container mx-auto p-4 mt-10 w-[50%]">
+          <div>
+            {notes.map((note) => (
+              <Category
+                key={note.id}
+                note={note}
+                onDelete={handleDelete}
+                onEdit={handleEdit}
+                onSave={handleEdit}
+                onCreateChild={handleCreateChild}
+              />
+            ))}
+          </div>
+        </div>
+        {/* <Category /> */}
       </>
     );
   }
-  const label = { inputProps: { "aria-label": "Switch demo" } };
   return (
     <div className="">
       <div className="flex">

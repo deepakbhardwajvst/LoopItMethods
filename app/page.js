@@ -1,4 +1,5 @@
 "use client";
+
 import Switch from "@mui/material/Switch";
 import InputText from "./component/input/InputText";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -106,7 +107,7 @@ const Home = () => {
           <input
             type="search"
             name=""
-            id=""
+            id="search"
             placeholder="Enter text..."
             className="w-[35%] border border-[#5A5A5A] p-4 outline-none"
           />
