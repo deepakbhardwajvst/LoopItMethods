@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 const Category = ({ note, onDelete, onEdit, onSave, onCreateChild }) => {
   const [editing, setEditing] = useState(false);
   const [content, setContent] = useState(note.content);

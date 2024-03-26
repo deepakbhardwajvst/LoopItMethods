@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
 import Switch from "@mui/material/Switch";
 import InputText from "./component/input/InputText";
-import { useSession, signIn, signOut } from "next-auth/react"
-import Navbar from './component/Navbar/Navbar';
+import { useSession, signIn, signOut } from "next-auth/react";
+import Navbar from "./component/Navbar/Navbar";
 import Link from "next/link";
 import Category from "./component/category/Category";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -38,67 +38,67 @@ const initialNotes = [
   },
 ];
 const Home = () => {
-   const [notes, setNotes] = useState(initialNotes);
-const deleteNote = (notes, noteId) => {
-  const updatedNotes = notes.map((note) => {
-    if (note.id === noteId) {
-      // If the current note matches the provided noteId, return null to delete it
-      return null;
-    } else if (note.children) {
-      // If the current note has children, recursively call deleteNote on its children
-      note.children = deleteNote(note.children, noteId);
-    }
-    return note;
-  });
+  const [notes, setNotes] = useState(initialNotes);
+  const deleteNote = (notes, noteId) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === noteId) {
+        // If the current note matches the provided noteId, return null to delete it
+        return null;
+      } else if (note.children) {
+        // If the current note has children, recursively call deleteNote on its children
+        note.children = deleteNote(note.children, noteId);
+      }
+      return note;
+    });
 
-  // Filter out the deleted note and update the notes array
-  return updatedNotes.filter((note) => note !== null);
-};
-const editNote = (notes, noteId, newContent) => {
-  const updatedNotes = notes.map((note) => {
-    if (note.id === noteId) {
-      note.content = newContent;
-    } else if (note.children) {
-      note.children = editNote(note.children, noteId, newContent);
-    }
-    return note;
-  });
-  return updatedNotes;
-};
+    // Filter out the deleted note and update the notes array
+    return updatedNotes.filter((note) => note !== null);
+  };
+  const editNote = (notes, noteId, newContent) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === noteId) {
+        note.content = newContent;
+      } else if (note.children) {
+        note.children = editNote(note.children, noteId, newContent);
+      }
+      return note;
+    });
+    return updatedNotes;
+  };
 
-const createChildNote = (notes, parentId) => {
-  const updatedNotes = notes.map((note) => {
-    if (note.id === parentId) {
-      const newChild = {
-        id: Date.now(),
-        content: "New Note",
-        children: [],
-      };
-      note.children = [...(note.children || []), newChild];
-    } else if (note.children) {
-      note.children = createChildNote(note.children, parentId);
-    }
-    return note;
-  });
-  return updatedNotes;
-};
-   const handleDelete = (noteId) => {
-     const updatedNotes = deleteNote(notes, noteId);
-     setNotes(updatedNotes);
-   };
+  const createChildNote = (notes, parentId) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === parentId) {
+        const newChild = {
+          id: Date.now(),
+          content: "New Note",
+          children: [],
+        };
+        note.children = [...(note.children || []), newChild];
+      } else if (note.children) {
+        note.children = createChildNote(note.children, parentId);
+      }
+      return note;
+    });
+    return updatedNotes;
+  };
+  const handleDelete = (noteId) => {
+    const updatedNotes = deleteNote(notes, noteId);
+    setNotes(updatedNotes);
+  };
 
-   const handleEdit = (noteId, newContent) => {
-     const updatedNotes = editNote(notes, noteId, newContent);
-     setNotes(updatedNotes);
-   };
+  const handleEdit = (noteId, newContent) => {
+    const updatedNotes = editNote(notes, noteId, newContent);
+    setNotes(updatedNotes);
+  };
 
-   const handleCreateChild = (parentId) => {
-     const updatedNotes = createChildNote(notes, parentId);
-     setNotes(updatedNotes);
-   };
-  const { data: session } = useSession()
+  const handleCreateChild = (parentId) => {
+    const updatedNotes = createChildNote(notes, parentId);
+    setNotes(updatedNotes);
+  };
+  const { data: session } = useSession();
   const label = { inputProps: { "aria-label": "Switch demo" } };
-  if(session) {
+  if (session) {
     return (
       <>
         Signed in as {session.user.name} <br />
@@ -215,7 +215,7 @@ const createChildNote = (notes, parentId) => {
               onClick={() => signIn("github")}
               className="flex justify-center items-center gap-2 w-[402px] text-[16px] font-medium py-2 px-4 bg-white text-black rounded-[10px] shadow"
             >
-              <GitHubIcon/>
+              <GitHubIcon />
               <p className="">Github</p>
             </button>
             <div className="my-4">
