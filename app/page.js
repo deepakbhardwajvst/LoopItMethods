@@ -41,16 +41,16 @@ const Home = () => {
   const deleteNote = (notes, noteId) => {
     const updatedNotes = notes.map((note) => {
       if (note.id === noteId) {
-        // If the current note matches the provided noteId, return null to delete it
+        // If the current note matches the provided noteId, returning null to delete it
         return null;
       } else if (note.children) {
-        // If the current note has children, recursively call deleteNote on its children
+        // If the current note has children, recursively calling deleteNote on its children
         note.children = deleteNote(note.children, noteId);
       }
       return note;
     });
 
-    // Filter out the deleted note and update the notes array
+    // Filtering out the deleted note and updating the notes array
     return updatedNotes.filter((note) => note !== null);
   };
   const editNote = (notes, noteId, newContent) => {
