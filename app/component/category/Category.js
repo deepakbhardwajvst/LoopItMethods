@@ -27,10 +27,10 @@ const Category = ({ note, onDelete, onEdit, onSave, onCreateChild }) => {
       ) : (
         <p>{note.content}</p>
       )}
-      <div className="mt-2 flex justify-between">
+      <div className="mt-2 flex ">
         <div>
           <button
-            className="bg-[#093e10] text-white p-1 mr-1  ml-4"
+            className="bg-[#093e10] text-white p-1 mr-1 "
             onClick={() => onDelete(note.id)}
           >
             Delete
@@ -43,25 +43,23 @@ const Category = ({ note, onDelete, onEdit, onSave, onCreateChild }) => {
           </button>
         </div>
         <div>
-          {editing ? (
-            <button
-              className="bg-[#133d14] text-white px-2 py-1 rounded-md"
-              onClick={handleSave}
-            >
-              Save
-            </button>
-          ) : (
-            <button
-              className="bg-[#093e10] text-white p-1 mr-1"
-              onClick={handleCreateChild}
-            >
-              New Notes
-            </button>
-          )}
+          <button
+            className="bg-[#093e10] text-white p-1 mr-1"
+            onClick={handleSave}
+          >
+            Save
+          </button>
+
+          <button
+            className="bg-[#093e10] text-white p-1 mr-1"
+            onClick={handleCreateChild}
+          >
+            New Notes
+          </button>
         </div>
       </div>
       {note.children && note.children.length > 0 && (
-        <div className="mt-4">
+        <div className="border border-[#90a041]">
           {note.children.map((childNote) => (
             <div key={childNote.id} className="ml-4">
               <Category

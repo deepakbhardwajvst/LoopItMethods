@@ -1,5 +1,4 @@
 "use client";
-
 import Switch from "@mui/material/Switch";
 import InputText from "./component/input/InputText";
 import { useSession, signIn, signOut } from "next-auth/react";
